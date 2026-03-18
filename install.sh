@@ -10,7 +10,7 @@
 # Ganti URL ini dengan repositori asli Anda setelah project dibuat!
 # Untuk demonstrasi agar sistem langsung "aktif", script akan membuat
 # boilerplate Laravel kosongan jika variabel ini tidak diubah.
-REPO_URL="https://github.com/sintasaitama5-jpg/RevoRadius.git"
+REPO_URL="https://github.com/laravel/laravel.git"
 
 DB_NAME="revo_radius_db"
 DB_USER="revo_user"

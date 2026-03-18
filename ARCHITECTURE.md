@@ -201,25 +201,47 @@ Jika lewat jatuh tempo dari `UNPAID` -> `OVERDUE` (memicu event `CustomerSuspend
 - **Sistem Keamanan**: Konfigurasi dikirimkan melalui koneksi API terenkripsi bila memungkinkan, atau melalui Tunnel manajemen.
 - Modul ini memastikan port tidak bentrok antar cabang.
 
-## 13. Struktur Folder Proyek (Laravel DDD Pattern)
-```
+## 13. Struktur Folder Proyek (Laravel DDD + Vue SPA + Inertia)
+Struktur di bawah ini mengisolasi logika bisnis (Domain-Driven) di backend dan memisahkan secara rapi komponen UI di frontend:
+
+```text
 /opt/revo-radius/app/
-├── app/
+├── app/                  <--- (BACKEND - PHP)
 │   ├── Domains/
-│   │   ├── Core/ (User, Role, Audit)
-│   │   ├── Router/ (Mikrotik API Client, Sync Jobs)
-│   │   ├── Hotspot/ (Voucher, Profiles)
-│   │   ├── Billing/ (Invoice, Payment, Midtrans Integration)
-│   │   └── Radius/ (Radcheck mapping)
+│   │   ├── Core/         (User, Role, Audit)
+│   │   ├── Router/       (Mikrotik API Client, Sync Jobs)
+│   │   ├── Hotspot/      (Voucher, Profiles)
+│   │   ├── Billing/      (Invoice, Payment, Midtrans Integration)
+│   │   └── Radius/       (Radcheck mapping)
 │   ├── Http/
 │   │   ├── Controllers/
 │   │   └── Middleware/
+├── resources/            <--- (FRONTEND - VUE 3 & TAILWIND CSS)
+│   ├── js/
+│   │   ├── Components/   (Komponen UI Reusable: Modal, Button, Table, Badge)
+│   │   ├── Layouts/      (Master Layouts: AppLayout.vue, Sidebar, Header)
+│   │   ├── Pages/        (Halaman Spesifik yang dipanggil oleh Controller)
+│   │   │   ├── Dashboard/Index.vue
+│   │   │   ├── Routers/Index.vue
+│   │   │   ├── Routers/Form.vue
+│   │   │   ├── Vouchers/Generate.vue
+│   │   │   ├── Billing/Invoices.vue
+│   │   │   └── Auth/Login.vue
+│   │   └── app.js        (Entry point Vue.js & konfigurasi Inertia)
+│   └── css/
+│       └── app.css       (Tailwind CSS directives)
 ├── config/
 ├── routes/
-│   ├── api.php
+│   ├── web.php           (Route untuk Vue SPA)
+│   └── api.php           (Route eksternal/webhook)
 ├── storage/
-│   └── logs/ (Rotated logs)
+│   └── logs/             (Rotated logs aplikasi & worker)
 ```
+
+**Alur Kerja Folder Frontend (`resources/js/`):**
+1. **Layouts**: Mengandung struktur utama web seperti Sidebar, Navbar, dan Footer. Contoh `AppLayout.vue`.
+2. **Pages**: Halaman yang dirender oleh backend. Misalnya ketika backend menjalankan `return Inertia::render('Routers/Index', ['routers' => $data])`, maka file `resources/js/Pages/Routers/Index.vue` akan dimuat.
+3. **Components**: Elemen kecil yang dipakai berulang di `Pages` agar kodingan bersih, misal: `<PrimaryButton>`, `<DataGrid>`, `<StatusBadge status="UNPAID" />`.
 
 ## 14. Struktur Service Linux / Systemd
 Aplikasi tidak boleh menimpa service bawaan sistem. Revo Radius akan memiliki 3 *systemd service*:
