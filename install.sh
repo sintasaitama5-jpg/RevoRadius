@@ -7,10 +7,8 @@
 # ======================================================================
 
 # --- Konfigurasi Variabel Otomatis ---
-# Ganti URL ini dengan repositori asli Anda setelah project dibuat!
-# Untuk demonstrasi agar sistem langsung "aktif", script akan membuat
-# boilerplate Laravel kosongan jika variabel ini tidak diubah.
-REPO_URL="https://github.com/laravel/laravel.git"
+# Repositori Resmi Revo Radius
+REPO_URL="https://github.com/sintasaitama5-jpg/RevoRadius.git"
 
 DB_NAME="revo_radius_db"
 DB_USER="revo_user"
@@ -35,6 +33,18 @@ if [ "$EUID" -ne 0 ]; then
 fi
 
 print_msg "Memulai Instalasi Otomatis (Unattended) REVO RADIUS..."
+
+# 1.5 Pengecekan Port dan Dependensi Awal (Pre-Flight Check)
+print_msg "Melakukan Pre-Flight Check Service..."
+
+if command -v ss > /dev/null; then
+  # Cek port 8080 (agar Nginx Revo Radius tidak bentrok)
+  if ss -tuln | grep -q ":8080 "; then
+    print_warn "Port 8080 saat ini sedang digunakan oleh service lain."
+    print_warn "Nginx mungkin gagal melakukan listen pada port ini, harap matikan service yang berjalan atau ubah konfigurasi Nginx nanti."
+    sleep 3
+  fi
+fi
 
 # 2. Update System & Install Dependensi
 print_msg "Tahap 1: Instalasi Nginx, MariaDB, Redis, dan PHP 8.3..."
@@ -74,12 +84,13 @@ mkdir -p "$BACKUP_DIR"
 print_msg "Tahap 4: Mengunduh Source Code Aplikasi dari GitHub..."
 if [ -d "${APP_DIR}/.git" ]; then
     print_warn "Direktori repositori sudah ada. Melakukan git pull..."
-    cd $APP_DIR && git pull origin main
+    cd $APP_DIR && git pull origin main || print_warn "Gagal melakukan git pull. Menggunakan data lama..."
 else
     print_msg "Cloning dari ${REPO_URL} ke ${APP_DIR}..."
-    # Karena kita menggunakan repo dummy laravel/laravel, clone branch master/main
+    # Menghapus file sampah sebelum clone
     rm -rf $APP_DIR/* $APP_DIR/.* 2>/dev/null
-    git clone $REPO_URL $APP_DIR || print_err "Gagal melakukan clone repositori."
+    # Cek apakah github public atau private. Jika private (404/Auth error), akan memunculkan error instruktif
+    git clone $REPO_URL $APP_DIR || print_err "Gagal Clone! Jika Repositori bersifat Private, pastikan Anda telah setup SSH Keys atau Personal Access Token di server ini terlebih dahulu."
 fi
 
 # 7. Setup Aplikasi (Composer, .env, Key, Migrate)
