@@ -47,14 +47,23 @@ if command -v ss > /dev/null; then
 fi
 
 # 2. Update System & Install Dependensi
-print_msg "Tahap 1: Instalasi Nginx, MariaDB, Redis, dan PHP 8.3..."
+print_msg "Tahap 1: Instalasi Nginx, MariaDB, Redis, PHP 8.3, dan Node.js..."
 export DEBIAN_FRONTEND=noninteractive
 apt update -y
 apt upgrade -y
 apt install -y software-properties-common curl wget unzip git net-tools
+
+# Instal dependensi backend PHP
 apt install -y mariadb-server php8.3 php8.3-fpm php8.3-cli php8.3-mysql \
                php8.3-xml php8.3-mbstring php8.3-curl php8.3-zip php8.3-gd \
-               nginx redis-server supervisor || print_err "Gagal menginstal dependensi."
+               nginx redis-server supervisor || print_err "Gagal menginstal dependensi PHP."
+
+# Instal Node.js 20.x (Untuk build Vue 3 Frontend)
+if ! command -v node &> /dev/null; then
+    print_msg "Menginstal Node.js..."
+    curl -fsSL https://deb.nodesource.com/setup_20.x | bash -
+    apt-get install -y nodejs || print_err "Gagal menginstal Node.js"
+fi
 
 # 3. Instalasi Composer Global
 if ! command -v composer &> /dev/null; then
@@ -121,8 +130,13 @@ sed -i "s/APP_URL=.*/APP_URL=http:\/\/localhost:8080/g" .env
 php artisan key:generate --force
 
 # Menjalankan Migrasi Database
-print_msg "Tahap 6: Melakukan Migrasi Database..."
-php artisan migrate --force
+print_msg "Tahap 6: Melakukan Migrasi Database & Seeding Awal..."
+php artisan migrate --force --seed
+
+# Mengcompile Frontend Assets (Vue 3/Vite)
+print_msg "Tahap 6.5: Mengkompilasi Aset Frontend Vue 3 (npm run build)..."
+npm install
+npm run build || print_warn "Peringatan: Gagal mem-build frontend. Jika tidak dibangun, UI mungkin tidak akan tampil."
 
 # Optimasi Cache
 php artisan config:cache
