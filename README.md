@@ -1,159 +1,66 @@
-# 🚀 REVO RADIUS
+<p align="center"><a href="https://laravel.com" target="_blank"><img src="https://raw.githubusercontent.com/laravel/art/master/logo-lockup/5%20SVG/2%20CMYK/1%20Full%20Color/laravel-logolockup-cmyk-red.svg" width="400" alt="Laravel Logo"></a></p>
 
-**Platform Manajemen Jaringan Mikrotik Modular & Terpusat**
+<p align="center">
+<a href="https://github.com/laravel/framework/actions"><img src="https://github.com/laravel/framework/workflows/tests/badge.svg" alt="Build Status"></a>
+<a href="https://packagist.org/packages/laravel/framework"><img src="https://img.shields.io/packagist/dt/laravel/framework" alt="Total Downloads"></a>
+<a href="https://packagist.org/packages/laravel/framework"><img src="https://img.shields.io/packagist/v/laravel/framework" alt="Latest Stable Version"></a>
+<a href="https://packagist.org/packages/laravel/framework"><img src="https://img.shields.io/packagist/l/laravel/framework" alt="License"></a>
+</p>
 
-![License: MIT](https://img.shields.io/badge/License-MIT-blue.svg)
-![Build: Passing](https://img.shields.io/badge/build-passing-brightgreen)
-![Version: 1.0.0-MVP](https://img.shields.io/badge/version-1.0.0--MVP-orange)
+## About Laravel
 
-## 📌 Apa itu Revo Radius?
+Laravel is a web application framework with expressive, elegant syntax. We believe development must be an enjoyable and creative experience to be truly fulfilling. Laravel takes the pain out of development by easing common tasks used in many web projects, such as:
 
-**REVO RADIUS** adalah sistem billing dan manajemen ISP/RT-RW Net yang dirancang dengan **arsitektur modular ekstrem**. Sistem ini menangani ribuan router Mikrotik (v6 dan v7), manajemen staf multi-tenant, billing bulanan, hotspot voucher massal, serta integrasi langsung dengan **FreeRADIUS** dan **WireGuard/L2TP Tunnel** tanpa mengganggu ekosistem Linux Anda yang sudah ada.
+- [Simple, fast routing engine](https://laravel.com/docs/routing).
+- [Powerful dependency injection container](https://laravel.com/docs/container).
+- Multiple back-ends for [session](https://laravel.com/docs/session) and [cache](https://laravel.com/docs/cache) storage.
+- Expressive, intuitive [database ORM](https://laravel.com/docs/eloquent).
+- Database agnostic [schema migrations](https://laravel.com/docs/migrations).
+- [Robust background job processing](https://laravel.com/docs/queues).
+- [Real-time event broadcasting](https://laravel.com/docs/broadcasting).
 
-Dibangun dengan prinsip bahwa *"kegagalan satu modul tidak boleh meruntuhkan seluruh sistem."*
+Laravel is accessible, powerful, and provides tools required for large, robust applications.
 
----
+## Learning Laravel
 
-## 🏗️ Fitur Utama
+Laravel has the most extensive and thorough [documentation](https://laravel.com/docs) and video tutorial library of all modern web application frameworks, making it a breeze to get started with the framework.
 
-- **🛡️ Manajemen Multi-Router & Multi-Owner**: Setiap staf/owner hanya bisa melihat router dan pendapatan dari areanya sendiri (Role-Based Access Control).
-- **💸 Billing & Invoice Cerdas**: Penagihan bulanan otomatis, payment gateway (Midtrans & Manual), auto-suspend saat menunggak, dan auto-unsuspend saat lunas.
-- **🎫 Hotspot Voucher Engine**: Generator voucher massal dengan pelacakan pendapatan yang akurat (voucher *unpaid* tidak dihitung sebagai pemasukan sampai diaktifkan/terjual).
-- **📡 FreeRADIUS Native Integration**: Terhubung langsung dengan skema database FreeRADIUS (`radcheck`, `radreply`, `radacct`) menggunakan MariaDB.
-- **🔐 Manajemen Tunnel (WireGuard & L2TP)**: Hubungkan ribuan router cabang ke server pusat secara otomatis via API dari dashboard Revo Radius.
-- **⚙️ Toleransi Kegagalan (Graceful Sync)**: Jika router klien *offline*, sinkronisasi perubahan profil/user akan dimasukkan ke dalam antrean (*queue*) latar belakang dan dicoba ulang (retry) otomatis saat router *online* kembali.
+You may also try the [Laravel Bootcamp](https://bootcamp.laravel.com), where you will be guided through building a modern Laravel application from scratch.
 
----
+If you don't feel like reading, [Laracasts](https://laracasts.com) can help. Laracasts contains thousands of video tutorials on a range of topics including Laravel, modern PHP, unit testing, and JavaScript. Boost your skills by digging into our comprehensive video library.
 
-## 🛠️ Tech Stack & Persyaratan Sistem
+## Laravel Sponsors
 
-**Teknologi Utama:**
-- **Backend:** PHP 8.3 (Laravel 11.x)
-- **Frontend:** Vue 3 (SPA / Inertia.js)
-- **Database:** MariaDB 10.6+
-- **Antrean (Queue):** Redis / Database Queue (Worker Systemd)
-- **Web Server:** Nginx (via Reverse Proxy untuk isolasi port)
+We would like to extend our thanks to the following sponsors for funding Laravel development. If you are interested in becoming a sponsor, please visit the [Laravel Partners program](https://partners.laravel.com).
 
-**Persyaratan Bare Metal:**
-- Sistem Operasi: **Ubuntu 24.04 LTS**
-- CPU Minimal: 2 Core
-- RAM Minimal: 4 GB
-- Penyimpanan: 40 GB NVMe/SSD
+### Premium Partners
 
----
+- **[Vehikl](https://vehikl.com/)**
+- **[Tighten Co.](https://tighten.co)**
+- **[WebReinvent](https://webreinvent.com/)**
+- **[Kirschbaum Development Group](https://kirschbaumdevelopment.com)**
+- **[64 Robots](https://64robots.com)**
+- **[Curotec](https://www.curotec.com/services/technologies/laravel/)**
+- **[Cyber-Duck](https://cyber-duck.co.uk)**
+- **[DevSquad](https://devsquad.com/hire-laravel-developers)**
+- **[Jump24](https://jump24.co.uk)**
+- **[Redberry](https://redberry.international/laravel/)**
+- **[Active Logic](https://activelogic.com)**
+- **[byte5](https://byte5.de)**
+- **[OP.GG](https://op.gg)**
 
-## 🚀 Instalasi Bare Metal (Ubuntu 24.04)
+## Contributing
 
-Revo Radius dirancang untuk beroperasi di foldernya sendiri tanpa menimpa konfigurasi layanan utama sistem. Panduan lengkap arsitektur sistem dapat dibaca di [`ARCHITECTURE.md`](ARCHITECTURE.md).
+Thank you for considering contributing to the Laravel framework! The contribution guide can be found in the [Laravel documentation](https://laravel.com/docs/contributions).
 
-### 1. Menyiapkan Dependensi
+## Code of Conduct
 
-Jalankan perintah berikut untuk menginstal PHP 8.3 dan MariaDB:
+In order to ensure that the Laravel community is welcoming to all, please review and abide by the [Code of Conduct](https://laravel.com/docs/contributions#code-of-conduct).
 
-```bash
-sudo apt update
-sudo apt install -y mariadb-server php8.3 php8.3-fpm php8.3-cli php8.3-mysql php8.3-xml php8.3-mbstring php8.3-curl unzip curl nginx redis-server
-```
+## Security Vulnerabilities
 
-### 2. Konfigurasi Database
+If you discover a security vulnerability within Laravel, please send an e-mail to Taylor Otwell via [taylor@laravel.com](mailto:taylor@laravel.com). All security vulnerabilities will be promptly addressed.
 
-Buat database khusus untuk Revo Radius:
+## License
 
-```bash
-sudo mysql -e "CREATE DATABASE revo_radius_db;"
-sudo mysql -e "CREATE USER 'revo_user'@'localhost' IDENTIFIED BY 'PasswordKuatAnda123!';"
-sudo mysql -e "GRANT ALL PRIVILEGES ON revo_radius_db.* TO 'revo_user'@'localhost';"
-sudo mysql -e "FLUSH PRIVILEGES;"
-```
-
-### 3. Mengatur Folder Aplikasi
-
-```bash
-# Buat direktori aplikasi, log, dan backup
-sudo mkdir -p /opt/revo-radius/app
-sudo mkdir -p /var/log/revo-radius
-sudo mkdir -p /var/lib/revo-radius/backups
-
-# Atur kepemilikan folder agar bisa diakses oleh web-server
-sudo chown -R www-data:www-data /opt/revo-radius /var/log/revo-radius /var/lib/revo-radius
-```
-
-### 4. Deploy Aplikasi
-
-Masuk ke direktori `/opt/revo-radius/app/` lalu jalankan perintah berikut (asumsi *source code* sudah di-clone ke folder ini):
-
-```bash
-cd /opt/revo-radius/app
-composer install --optimize-autoloader --no-dev
-cp .env.example .env
-php artisan key:generate
-```
-
-Ubah kredensial database di file `.env`:
-```env
-DB_CONNECTION=mysql
-DB_HOST=127.0.0.1
-DB_PORT=3306
-DB_DATABASE=revo_radius_db
-DB_USERNAME=revo_user
-DB_PASSWORD=PasswordKuatAnda123!
-```
-
-Migrasikan skema database dan masukkan data default (Superadmin & Role):
-```bash
-php artisan migrate --seed
-```
-
-### 5. Mengaktifkan Background Worker
-
-Background worker wajib dinyalakan karena sinkronisasi Mikrotik dan pengiriman Invoice diproses di latar belakang agar UI tetap cepat.
-
-Buat file systemd di `/etc/systemd/system/revo-radius-worker.service`:
-
-```ini
-[Unit]
-Description=Revo Radius Queue Worker
-After=network.target
-
-[Service]
-User=www-data
-Group=www-data
-Restart=always
-ExecStart=/usr/bin/php /opt/revo-radius/app/artisan queue:work --sleep=3 --tries=3
-StandardOutput=append:/var/log/revo-radius/worker.log
-StandardError=append:/var/log/revo-radius/worker.log
-
-[Install]
-WantedBy=multi-user.target
-```
-
-Nyalakan *service* worker tersebut:
-```bash
-sudo systemctl daemon-reload
-sudo systemctl enable revo-radius-worker
-sudo systemctl start revo-radius-worker
-```
-
----
-
-## 📖 Struktur Direktori Khusus Linux
-Aplikasi ini mematuhi standar direktori Linux (FHS) agar tidak bertabrakan dengan *software* lain:
-- **Source Code**: `/opt/revo-radius/app/`
-- **Konfigurasi Spesifik**: `/etc/revo-radius/` (Opsional, untuk env lanjutan)
-- **Log Aplikasi & Worker**: `/var/log/revo-radius/`
-- **Penyimpanan Backup DB & File (PDF/Invoice)**: `/var/lib/revo-radius/`
-
----
-
-## 🤝 Dokumentasi Lanjutan
-
-Untuk memahami alur kerja frontend-ke-backend, struktur database modular, State Machine voucher, cara integrasi Mikrotik API (v6 & v7) serta arsitektur Tunnel (WireGuard/L2TP), silakan baca dokumen pendamping:
-👉 **[ARCHITECTURE.md](ARCHITECTURE.md)**
-
----
-
-## 🛡️ Keamanan & Lisensi
-
-Revo Radius tidak pernah menyimpan password router Anda dalam bentuk teks biasa (plaintext). Semua kredensial router Mikrotik dienkripsi di dalam *database* menggunakan algoritma AES-256 (via `APP_KEY` environment variable).
-
-Hak cipta dilindungi undang-undang. Diperuntukkan bagi Enterprise dan komunitas ISP/Hotspot.
+The Laravel framework is open-sourced software licensed under the [MIT license](https://opensource.org/licenses/MIT).
