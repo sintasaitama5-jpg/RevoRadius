@@ -23,4 +23,16 @@ Route::middleware('auth')->group(function () {
     Route::post('/routers', [RouterController::class, 'store'])->name('routers.store');
     Route::delete('/routers/{router}', [RouterController::class, 'destroy'])->name('routers.destroy');
     Route::post('/routers/{router}/test', [RouterController::class, 'testConnection'])->name('routers.test');
+
+    // Hotspot Voucher System (Fase 3)
+    Route::get('/vouchers', [App\Http\Controllers\VoucherController::class, 'index'])->name('vouchers.index');
+    Route::post('/vouchers/generate', [App\Http\Controllers\VoucherController::class, 'generate'])->name('vouchers.generate');
+    Route::post('/vouchers/batches/{batch}/activate', [App\Http\Controllers\VoucherController::class, 'activate'])->name('vouchers.activate');
+
+    // PPPoE & Billing System (Fase 4)
+    Route::get('/customers', [App\Http\Controllers\CustomerController::class, 'index'])->name('customers.index');
+    Route::post('/customers', [App\Http\Controllers\CustomerController::class, 'store'])->name('customers.store');
+
+    Route::get('/billing', [App\Http\Controllers\BillingController::class, 'index'])->name('billing.index');
+    Route::post('/billing/invoices/{invoice}/pay', [App\Http\Controllers\BillingController::class, 'pay'])->name('billing.pay');
 });

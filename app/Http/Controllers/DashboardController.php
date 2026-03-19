@@ -2,6 +2,10 @@
 
 namespace App\Http\Controllers;
 
+use App\Domains\Router\Models\Router;
+use App\Domains\Hotspot\Models\Voucher;
+use App\Domains\Billing\Models\Customer;
+use App\Domains\Billing\Models\Invoice;
 use Inertia\Inertia;
 
 class DashboardController extends Controller
@@ -10,10 +14,10 @@ class DashboardController extends Controller
     {
         return Inertia::render('Dashboard/Index', [
             'stats' => [
-                'routers' => 0,
-                'active_vouchers' => 0,
-                'pppoe_members' => 0,
-                'unpaid_invoices' => 0
+                'routers' => Router::count(),
+                'active_vouchers' => Voucher::where('status', 'ACTIVE')->count(),
+                'pppoe_members' => Customer::where('status', 'ACTIVE')->count(),
+                'unpaid_invoices' => Invoice::whereIn('status', ['UNPAID', 'OVERDUE'])->count()
             ]
         ]);
     }
