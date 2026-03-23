@@ -25,6 +25,12 @@ Route::middleware('auth')->group(function () {
     Route::post('/routers/{router}/test', [RouterController::class, 'testConnection'])->name('routers.test');
 
     // Hotspot Voucher System (Fase 3)
+    Route::get('/hotspot/users', function() { return inertia('Radius/Hotspot/Users'); })->name('hotspot.users');
+    Route::get('/hotspot/profiles', function() { return inertia('Radius/Hotspot/Profiles'); })->name('hotspot.profiles');
+    Route::get('/hotspot/generate', function() { return inertia('Radius/Hotspot/Generate'); })->name('hotspot.generate');
+    Route::get('/hotspot/print', function() { return inertia('Radius/Hotspot/Print'); })->name('hotspot.print');
+    Route::get('/hotspot/templates', function() { return inertia('Radius/Hotspot/Templates'); })->name('hotspot.templates');
+
     Route::get('/vouchers', [App\Http\Controllers\VoucherController::class, 'index'])->name('vouchers.index');
     Route::post('/vouchers/generate', [App\Http\Controllers\VoucherController::class, 'generate'])->name('vouchers.generate');
     Route::post('/vouchers/batches/{batch}/activate', [App\Http\Controllers\VoucherController::class, 'activate'])->name('vouchers.activate');

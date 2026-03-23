@@ -65,15 +65,19 @@
           </button>
           <div v-show="openMenus.hotspot" class="pl-11 pr-4 py-2 space-y-1">
             <div class="relative before:absolute before:inset-y-0 before:left-[-1.25rem] before:w-px before:bg-gray-700">
-              <Link href="/vouchers" :class="['relative flex items-center px-3 py-2 text-sm rounded-lg transition-colors', isUrl('/vouchers') ? 'text-white bg-[#1e293b]' : 'text-gray-400 hover:text-white hover:bg-[#1e293b]']">
+              <Link :href="route('hotspot.users')" :class="['relative flex items-center px-3 py-2 text-sm rounded-lg transition-colors', isUrl('/hotspot/users') ? 'text-white bg-[#1e293b]' : 'text-gray-400 hover:text-white hover:bg-[#1e293b]']">
                 <span class="absolute left-[-1.5rem] w-2 h-2 rounded-full bg-gray-500 border-2 border-[#111827]"></span>
                 Pengguna
               </Link>
-              <Link href="#" class="relative flex items-center px-3 py-2 text-sm text-gray-400 hover:text-white hover:bg-[#1e293b] rounded-lg transition-colors">
+              <Link :href="route('hotspot.profiles')" :class="['relative flex items-center px-3 py-2 text-sm rounded-lg transition-colors', isUrl('/hotspot/profiles') ? 'text-white bg-[#1e293b]' : 'text-gray-400 hover:text-white hover:bg-[#1e293b]']">
                 <span class="absolute left-[-1.5rem] w-2 h-2 rounded-full bg-gray-500 border-2 border-[#111827]"></span>
                 Profil
               </Link>
-              <Link href="#" class="relative flex items-center px-3 py-2 text-sm text-gray-400 hover:text-white hover:bg-[#1e293b] rounded-lg transition-colors">
+              <Link :href="route('hotspot.generate')" :class="['relative flex items-center px-3 py-2 text-sm rounded-lg transition-colors', isUrl('/hotspot/generate') ? 'text-white bg-[#1e293b]' : 'text-gray-400 hover:text-white hover:bg-[#1e293b]']">
+                <span class="absolute left-[-1.5rem] w-2 h-2 rounded-full bg-gray-500 border-2 border-[#111827]"></span>
+                Generate
+              </Link>
+              <Link :href="route('hotspot.templates')" :class="['relative flex items-center px-3 py-2 text-sm rounded-lg transition-colors', isUrl('/hotspot/templates') ? 'text-white bg-[#1e293b]' : 'text-gray-400 hover:text-white hover:bg-[#1e293b]']">
                 <span class="absolute left-[-1.5rem] w-2 h-2 rounded-full bg-gray-500 border-2 border-[#111827]"></span>
                 Template
               </Link>
